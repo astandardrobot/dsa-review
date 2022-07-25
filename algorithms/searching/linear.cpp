@@ -8,6 +8,9 @@
  * Otheweise, return -1
 */
 int linearSearch(std::vector<int> &v, int x) {
+    if(v.size() == 0) {
+        return -1;
+    }
     for(int i = 0; i <= v.size(); i++) {
         if(v[i] == x) {
             return i;

@@ -22,7 +22,7 @@
  */
 
 int main() {
-    std::priority_queue<int> pq {};
+    std::priority_queue<int> pq;
     pq.push(1);
     pq.push(10);
     pq.push(11);
