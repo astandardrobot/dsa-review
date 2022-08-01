@@ -1,5 +1,7 @@
 # WHAT IS THIS?
 
-This is a data structures and algorithms (DS+A) review. This is largely just for my own benefit, but if you find it useful, feel free to use this.
+Obviously, this is just a compiled collection of resources for DS+A preparation.
+
+More importantly, this has been made for MY personal usage, so I'm sure things can be optimized and whatnot.
 
 -standardrobot
