@@ -1,55 +1,77 @@
 #include <iostream>
-#include <vector>
-#include <map>
 #include <stack>
-#include <list>
+#include <vector>
 
-class Graph 
-{
-    int numVertices;
-    std::list<int> *adjLists;
-    bool *visited;
-public:
-    Graph(int V);
-    void addEdge(int src, int dest);
-    void DFS(int vertex);
+
+struct GraphNode {
+    int val;
+    GraphNode *left;
+    GraphNode *right;
+    GraphNode() : val(0), left(nullptr), right(nullptr) {}
+    GraphNode(int x) : val(x), left(nullptr), right(nullptr) {}
+    GraphNode(int x, GraphNode *left, GraphNode *right) : val(x), left(left), right(right) {}
 };
 
 
-Graph::Graph(int vertices) {
-    numVertices = vertices;
-    adjLists = new std::list<int>[vertices];
-    visited = new bool[vertices];
+class Graph {
+private:
+    int v;
+    std::vector<std::vector<int>> adjList;
+public:
+    Graph(int v);
+    void addEdge(int v, int w);
+    void dfs(int x);
+};
+
+Graph::Graph(int v)
+{
+    this->v = v;
+    adjList.resize(v);
 }
-void Graph::addEdge(int src, int dest) {
-    adjLists[src].push_front(dest);
+ 
+void Graph::addEdge(int v, int w)
+{
+    adjList[v].push_back(w); // Add w to v’s list.
 }
 
-/*
- * A depth-first search (DFS) is a very fundamental tree/graph algorithm.
- * Think about it like a game of chess. What your opponent does will deterine how you move your next piece
- * and this will occur over and over. There really isn't an option to look for the shortest path to victory...
- * (or rather, there obviously is, but it's extremely inefficient, if not flawed in this case).
- *
- * A DFS starts at the root, and looks at all nodes along a given branch before backtracking to the next.
- * We're using a stack to keep track of these nodes on a given path, and a visited vector to store the already visited nodes.
- * while the stack isn't empty, the vertex (or source) is the last added node.
- * We pop that from the stack to look at nodes adjacent to this source node.
- * If it hasn't been visited, mark its index in the visited vector as true and push it to the stack.
- */
 
-void Graph::DFS(int vertex) {
-    visited[vertex] = true;
-    std::stack<int> stk;
-    stk.push(vertex);
-    while(!stk.empty()) {
-        vertex = stk.top();
-        stk.pop();
-        for(auto &adj : adjLists[vertex]) {
-            if(!visited[vertex]) {
-                visited[adj] = true;
-                stk.push(adj);
+
+void Graph::dfs(int node) {
+    
+    std::vector<bool> visited(v,false);
+    // Maintain a stack of unvisited adjacent nodes
+    std::stack<int> neighborList;
+    neighborList.push(node);
+    // as these values enter and are popped, mark them as visited
+    while(!neighborList.empty()) {
+        // inspect the top element
+        int firstVal = neighborList.top();
+        // pop it
+        neighborList.pop();
+        // The stack may contain already visited nodes. if this isn't a visited node
+        if(!visited[firstVal]) {
+            std::cout<<firstVal<<" ";
+            // mark it as visited and print it
+            visited[firstVal] = true;
+        }
+        // If an adjacent node to firstVal has not been visited, push it to the stack 
+        for(auto i= adjList[firstVal].begin(); i != adjList[firstVal].end(); i++) {
+            if(!visited[*i]) {
+               neighborList.push(*i);
             }
         }
     }
 }
+
+int main() {
+    Graph g(5); // Total 5 vertices in graph
+    g.addEdge(1, 0);
+    g.addEdge(0, 2);
+    g.addEdge(2, 1);
+    g.addEdge(0, 3);
+    g.addEdge(1, 4);
+ 
+    std::cout << "Following is Depth First Traversal\n";
+    g.dfs(0);     
+}
+

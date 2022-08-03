@@ -51,10 +51,6 @@ public:
  *
  * These are DEPTH-FIRST traversals. We're taking care of one branch before moving onto the next.
  *
- * Below is an example of a BREADTH-FIRST traversal. We think of organizing the tree with "levels".
- * Level order:
- *      - Go through each "level" and visit nodes from left to right.
- *      - In the above example: 1,2,3,8,4,7,6,5
  *
  * 
  */
