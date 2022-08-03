@@ -33,6 +33,14 @@ void Graph::addEdge(int v, int w)
     adjList[v].push_back(w); // Add w to v’s list.
 }
 
+/*
+ * A breadth-first search (BFS) is just a way to find a node that meets determined criteria. Unlike a DFS, however, it 
+ * goes from the root and travels through each level. It uses a queue to keep track of VISITED, but UNEXPLORED values.
+ * The queue's FIFO access policy embraces the logic behind iterating through a tree-structure by level.
+ *
+ *  The complexity of a BFS is O(|V| + |E|) where V = the vertices and E = the edges.
+ *  The space complexity is O(|V|), where v is the number of vertices.
+ */ 
 void Graph::bfs(int node) {
     
     std::vector<bool> visited(v,false);

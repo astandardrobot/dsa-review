@@ -34,8 +34,15 @@ void Graph::addEdge(int v, int w)
     adjList[v].push_back(w); // Add w to v’s list.
 }
 
-
-
+/*
+ * A depth-first search (DFS) is a way to find a node that meets determined criteria. Unlike a BFS,
+ * it travels down the height of one branch before backtracking to the parent node and moving to the next branch.
+ * It we visualize what this looks like, it makes sense to use a stack (the nodes are stacked upon one another).
+ * THe LIFO access policy embraces the logic behind backtracking.
+ *
+ * The complexity of a DFS is O(|V| + |E|) where V = vertices and E = edges
+ * The space complexity of a DFS is O(|V|) where V = edges
+ */
 void Graph::dfs(int node) {
     
     std::vector<bool> visited(v,false);
