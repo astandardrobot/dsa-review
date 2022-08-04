@@ -20,38 +20,56 @@ void newSwap(T *a, T *b)
     *a = *b;
     *b = t;
 }
-
-void merge(std::vector<int> &v, int left, int mid, int right) { 
-    int nLeft=mid-left+1, nRight=mid-right;
-    std::vector<int> tmpLeft, tmpRight;
-    for(int i = 0; i<nLeft;i++)
-        tmpLeft[i] = v[left+i];
-    for(int j = 0; j < nRight; j++)
-        tmpRight[j] = v[mid+j+1];
-    int i = 0, j = 0, k = 1;
-    while(i<nLeft && j < nRight) {
-        if(tmpLeft[i] <= tmpRight[j]) {
-            v[k] = tmpLeft[i];
-            i++;
+/*
+ * MergeSort is an example of a divide and conquer algorithm. The goal is to take two halves of an array / vector and
+ * sort these sections. These sections will be recursively divided until there is only one element left or the 
+ * structure is empty, with the intent of merging them at the end.
+ *
+ * The merge function below is the meat and potatoes of this algortihm. Essentially, this performs the array division.
+ * The MergeSort function just recursively invokes merge to compile the final, sorted structure.
+ *
+ * The benefit of using a merge sort is that the complexity will usually be O(n log(n)) because it's always going to
+ * keep dividing sections. Since merge sorted elements are copied into another vector, the space complexity = O(n)
+ */
+void merge(std::vector<int> &v, int left, int mid, int right) {
+    std::vector<int> tmp;
+    int firstIndex = left;
+    int secondIndex = mid+1;
+    while(firstIndex <= mid && secondIndex <= right) {
+        if(v[firstIndex] <= v[secondIndex]) {
+            tmp.push_back(v[firstIndex]);
+            firstIndex++;
         } else {
-            v[k] = tmpRight[j];
-            j++;
+            tmp.push_back(v[secondIndex]);
+            secondIndex++;
         }
-        k++;
     }
-    while(i<nLeft) {
-        v[k] = tmpLeft[i];
-        i++; k++;
+    while(firstIndex <= mid) {
+        tmp.push_back(v[firstIndex]);
+        firstIndex++;
     }
-    while(j<nRight) {
-        v[k]=tmpRight[j];
-        j++; k++;
+    while(secondIndex <= right) {
+        tmp.push_back(v[secondIndex]);
+        secondIndex++;
+    }
+    for(int i = left; i <= right; i++) {
+        v[i] = tmp[i-left];
     }
 }
 
+void mergeSort(std::vector<int> &v, int start, int end) {
+    if(start >= end) {
+        return;
+    }
+    int mid = start + (end - start) / 2;
+    mergeSort(v, start, mid);
+    mergeSort(v, mid+1, end);
+    merge(v, start, mid, end);
+}
+
 int main() {
-    std::vector<int> v7 = {4, 1, 3, 2, 16, 9, 10, 14, 8, 7};
+    std::vector<int> v7 = {6,5,4,3,2,1};
     mergeSort(v7, 0, v7.size()-1);
-    std::cout<<"Max heap sort: ";
+    std::cout<<"MergeSort: ";
     print_array(v7);
 }
