@@ -20,16 +20,16 @@ int printq(int dist[], int n) {
 }
 
 /*
- * This minDist function is the meat of the algorithm. This finds the shortest path from the vertices that are not yet included in the
- * shortest path tree.
+ * This minDist function is the meat of the algorithm. The goal of this function is to find the shortest path 
+ * from the vertices that are not yet included in the shortest path tree.
  */
 int minDist(int dist[], bool visitedSet[]) {
-    int min = INT_MAX;
+    int minimum = INT_MAX;
     int index;
 
     for(int i=0; i<vertices; i++) {
-        if(visitedSet[i] == false && dist[i] <= min) {
-            min = dist[i], index = i;
+        if(visitedSet[i] == false && dist[i] <= minimum) {
+            minimum = dist[i], index = i;
         }
     }
     return index;
