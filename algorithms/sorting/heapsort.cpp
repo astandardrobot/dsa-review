@@ -3,11 +3,12 @@
 #include <stack>
 #include <algorithm>
 #include <queue>
+
 // Templates
 template<typename T>
-void print_array(T const(& arr))
+void print_array(T const(& vec))
 {
-    for(auto i : arr) {
+    for(auto i : vec) {
         std::cout<<i<<' ';
     }
     std::cout<<""<<std::endl;
@@ -34,26 +35,26 @@ void newSwap(T *a, T *b)
  *      }
 */
 template<typename T>
-void maxHeapify(T &v, int root, int size_) {
+void maxHeapify(T &vec, int root, int size_) {
     int largest, x = (2*root)+1, y=x+1;
     
-    if(x < size_ && v[x] > v[root])
+    if(x < size_ && vec[x] > vec[root])
         largest = x;
     else
         largest = root;
-    if(y < size_ && v[y] > v[largest])
+    if(y < size_ && vec[y] > vec[largest])
         largest = y;
     if(largest != root) {
         //std::swap(v[root], v[largest]);
-        newSwap(&v[root], &v[largest]);
-        maxHeapify(v, largest, size_);
+        newSwap(&vec[root], &vec[largest]);
+        maxHeapify(vec, largest, size_);
     }
 }
 
 template<typename T>
-void buildMaxHeap(T &v) {
-   for(int i = (v.size() / 2); i >= 0; i--) {
-        maxHeapify(v, i, v.size());
+void buildMaxHeap(T &vec) {
+   for(int i = (vec.size() / 2); i >= 0; i--) {
+        maxHeapify(vec, i, vec.size());
    }
 }
 

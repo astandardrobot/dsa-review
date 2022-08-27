@@ -33,8 +33,8 @@ void newSwap(T *a, T *b)
  */
 void merge(std::vector<int> &v, int left, int mid, int right) {
     std::vector<int> tmp;
-    int firstIndex = left;
-    int secondIndex = mid+1;
+    int firstIndex = left, secondIndex = mid+1;
+
     while(firstIndex <= mid && secondIndex <= right) {
         if(v[firstIndex] <= v[secondIndex]) {
             tmp.push_back(v[firstIndex]);
@@ -58,9 +58,7 @@ void merge(std::vector<int> &v, int left, int mid, int right) {
 }
 
 void mergeSort(std::vector<int> &v, int start, int end) {
-    if(start >= end) {
-        return;
-    }
+    if(start >= end) return;
     int mid = start + (end - start) / 2;
     mergeSort(v, start, mid);
     mergeSort(v, mid+1, end);
@@ -68,7 +66,7 @@ void mergeSort(std::vector<int> &v, int start, int end) {
 }
 
 int main() {
-    std::vector<int> v7 = {6,5,4,3,2,1};
+    std::vector<int> v7 = {6,5,4,3,2,1,0,-12};
     mergeSort(v7, 0, v7.size()-1);
     std::cout<<"MergeSort: ";
     print_array(v7);
