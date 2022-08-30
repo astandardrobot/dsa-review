@@ -26,6 +26,8 @@ void newSwap(T *a, T *b)
  * It repeatedly swaps adjacent values if they are `not ordered already.
  * The nested for loops causes this function to run at O(n^2).
  * However, this can be slightly optimized by breaking the loop if the inner loop doesn't swap
+ * Though generally, especially in interviews, this is used as a brute force solution before moving into
+ * more detailed improvements
 */
 void bubbleSort(std::vector<int>&v) {
     bool swapped;
