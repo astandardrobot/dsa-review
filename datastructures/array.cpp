@@ -6,7 +6,8 @@
  */
 
 #include <iostream>
-/* C++'s "stock" implementation of an array is essentially a super minimalist wrapper around the C implementaiton of an
+/*
+ * C++'s "stock" implementation of an array is essentially a super minimalist wrapper around the C implementaiton of an
  * array. The array implementation found in the stdlib is generally more dynamic, as it doesn't decay to a pointer when
  * passed into a function. Moreover, it provides the same functionality and syntactically, it's better aligned with other 
  * basic data structures.

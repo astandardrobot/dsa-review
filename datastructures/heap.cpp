@@ -32,60 +32,60 @@ void swap(int *a, int *b)
   *b = *a;
   *a = temp;
 }
-void heapify(std::vector<int> &hT, int i)
+void heapify(std::vector<int> &heapTree, int val)
 {
-  int size = hT.size();
-  int largest = i;
-  int l = 2 * i + 1;
-  int r = 2 * i + 2;
-  if (l < size && hT[l] > hT[largest])
+  int size = heapTree.size();
+  int largest = val;
+  int l = 2 * val + 1;
+  int r = 2 * val + 2;
+  if (l < size && heapTree[l] > heapTree[largest])
     largest = l;
-  if (r < size && hT[r] > hT[largest])
+  if (r < size && heapTree[r] > heapTree[largest])
     largest = r;
 
-  if (largest != i)
+  if (largest != val)
   {
-    swap(&hT[i], &hT[largest]);
-    heapify(hT, largest);
+    swap(&heapTree[val], &heapTree[largest]);
+    heapify(heapTree, largest);
   }
 }
-void insert(std::vector<int> &hT, int newNum)
+void insert(std::vector<int> &heapTree, int val)
 {
-  int size = hT.size();
+  int size = heapTree.size();
   if (size == 0)
   {
-    hT.push_back(newNum);
+    heapTree.push_back(val);
   }
   else
   {
-    hT.push_back(newNum);
+    heapTree.push_back(val);
     for (int i = size / 2 - 1; i >= 0; i--)
     {
-      heapify(hT, i);
+      heapify(heapTree, i);
     }
   }
 }
-void deleteNode(std::vector<int> &hT, int num)
+void deleteNode(std::vector<int> &heapTree, int val)
 {
-  int size = hT.size();
+  int size = heapTree.size();
   int i;
   for (i = 0; i < size; i++)
   {
-    if (num == hT[i])
+    if (val == heapTree[i])
       break;
   }
-  swap(&hT[i], &hT[size - 1]);
+  swap(&heapTree[i], &heapTree[size - 1]);
 
-  hT.pop_back();
+  heapTree.pop_back();
   for (int i = size / 2 - 1; i >= 0; i--)
   {
-    heapify(hT, i);
+    heapify(heapTree, i);
   }
 }
-void printArray(std::vector<int> &hT)
+void printArray(std::vector<int> &heapTree)
 {
-  for (int i = 0; i < hT.size(); ++i)
-    std::cout << hT[i] << " ";
+  for (int i = 0; i < heapTree.size(); ++i)
+    std::cout << heapTree[i] << " ";
   std::cout << "\n";
 }
 

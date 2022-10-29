@@ -25,37 +25,40 @@ void newSwap(T *a, T *b)
  * sort these sections. These sections will be recursively divided until there is only one element left or the 
  * structure is empty, with the intent of merging them at the end.
  *
- * The merge function below is the meat and potatoes of this algortihm. Essentially, this performs the array division.
+ * The merge function below is the meat of this algortihm. Essentially, this performs the array division.
  * The MergeSort function just recursively invokes merge to compile the final, sorted structure.
  *
- * The benefit of using a merge sort is that the complexity will usually be O(n log(n)) because it's always going to
- * keep dividing sections. Since merge sorted elements are copied into another vector, the space complexity = O(n)
+ * The benefit of using a merge sort is that the complexity will usually be O(n log(n)) because it's always going to keep dividing sections. Since merge sorted elements are copied into another vector, the space complexity = O(n)
+ *
+ * MergeSort is probably the best basic sorting algorithm to use with Linked lists, if you have to sort them
  */
 void merge(std::vector<int> &v, int left, int mid, int right) {
     std::vector<int> tmp;
-    int firstIndex = left, secondIndex = mid+1;
+    int firstIdxPtr = left;
+    int secondIdxPtr = mid+1;
 
-    while(firstIndex <= mid && secondIndex <= right) {
-        if(v[firstIndex] <= v[secondIndex]) {
-            tmp.push_back(v[firstIndex]);
-            firstIndex++;
+    while(firstIdxPtr <= mid && secondIdxPtr <= right) {
+        if(v[firstIdxPtr] <= v[secondIdxPtr]) {
+            tmp.push_back(v[firstIdxPtr]);
+            firstIdxPtr++;
         } else {
-            tmp.push_back(v[secondIndex]);
-            secondIndex++;
+            tmp.push_back(v[secondIdxPtr]);
+            secondIdxPtr++;
         }
     }
-    while(firstIndex <= mid) {
-        tmp.push_back(v[firstIndex]);
-        firstIndex++;
+    while(firstIdxPtr <= mid) {
+        tmp.push_back(v[firstIdxPtr]);
+        firstIdxPtr++;
     }
-    while(secondIndex <= right) {
-        tmp.push_back(v[secondIndex]);
-        secondIndex++;
+    while(secondIdxPtr <= right) {
+        tmp.push_back(v[secondIdxPtr]);
+        secondIdxPtr++;
     }
     for(int i = left; i <= right; i++) {
         v[i] = tmp[i-left];
     }
 }
+
 
 void mergeSort(std::vector<int> &v, int start, int end) {
     if(start >= end) return;

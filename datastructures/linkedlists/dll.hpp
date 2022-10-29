@@ -24,14 +24,14 @@ public:
 
     Node() {
         data = 0;
-        next = NULL;
-        prev = NULL;
+        next = nullptr;
+        prev = nullptr;
     }
 
     Node(T x) {
         data = x;
-        next = NULL;
-        prev = NULL;
+        next = nullptr;
+        prev = nullptr;
     }
 };
 
@@ -57,8 +57,8 @@ public:
     Node<T> *search(T val);
 
     DoubleLink() {
-        head = NULL;
-        tail = NULL;
+        head = nullptr;
+        tail = nullptr;
     }
 };
 
@@ -66,7 +66,7 @@ public:
 
 template <class T>
 bool DoubleLink<T>::isEmpty() {
-    if(head == NULL) {std::cout<<"true"<<std::endl; return true;}
+    if(head == nullptr) {std::cout<<"true"<<std::endl; return true;}
     else {std::cout<<"false"<<std::endl; return false;}
 }
 
@@ -74,7 +74,7 @@ template <class T>
 int DoubleLink<T>::size() {
    int count = 0;
    Node<T> *tmp = head;
-   while(tmp != NULL) {
+   while(tmp != nullptr) {
        count += 1;
        tmp = tmp->next;
    }
@@ -84,14 +84,21 @@ int DoubleLink<T>::size() {
 
 template <class T>
 void DoubleLink<T>::push_front(T val) {
+    // Create a new node
     Node<T> *node = new Node<T>[1];
+    // the argument will be the value
     node->data = val;
-    node->prev = NULL;
+    // since this is the head node, there won't be a previous node.
+    node->prev = nullptr;
+    // the prior head node will be this new head's next node.
     node->next = head;
-    if(head == NULL){
+    // if there's no head, this is the first node being added to the list.
+    if(head == nullptr){
        head = tail = node; 
     } else {
+        // otherwise, the old head's previos will be the new head.
         head->prev = node;
+        // the node becomes the new head.
         head = node;
     }
     std::cout<<"Added a front node"<<std::endl;
@@ -101,11 +108,11 @@ template <class T>
 void DoubleLink<T>::push_back(T val) {
     Node<T>* node = new Node<T>[1];
     node->data = val;
-    if(head == NULL) {
+    if(head == nullptr) {
         head = tail = node;
     }
     Node<T> *tmp = head;
-    while(tmp->next != NULL) {
+    while(tmp->next != nullptr) {
         tmp = tmp->next;
     }
     tmp->next = node;
@@ -118,7 +125,7 @@ template <class T>
 Node<T> *DoubleLink<T>::search(T val) {
     Node<T> *nodeptr = head;
     T res;
-    while(nodeptr != NULL && nodeptr->data != val) {
+    while(nodeptr != nullptr && nodeptr->data != val) {
         nodeptr = nodeptr->next;
         res = nodeptr->data;
     }
@@ -136,9 +143,9 @@ void DoubleLink<T>::insert(T index, T val) {
     node->data = val;
     int count = 0;
     Node<T>* tmp = head;
-    while(tmp != NULL && count < index){
+    while(tmp != nullptr && count < index){
         if(count == index-1){
-            if(tmp->next != NULL){
+            if(tmp->next != nullptr){
                 node->next = tmp->next;
             }
             tmp->next = node;
@@ -152,20 +159,20 @@ void DoubleLink<T>::insert(T index, T val) {
 
 template <class T>
 void DoubleLink<T>::remove_back(){
-    if(head == NULL){
+    if(head == nullptr){
         std::cout<<"linked list is empty !"<<std::endl;
         return;
     }
-    if(head->next == NULL){
-        head = NULL;
+    if(head->next == nullptr){
+        head = nullptr;
         std::cout<<"last item removed"<<std::endl;
         return;
     }
 
     Node<T>* tmp = head;
-    while(tmp != NULL){
-        if(tmp->next->next == NULL){
-            tmp->next = NULL;
+    while(tmp != nullptr){
+        if(tmp->next->next == nullptr){
+            tmp->next = nullptr;
             std::cout<<"last item removed"<<std::endl;
             break;
         }
@@ -177,7 +184,7 @@ void DoubleLink<T>::remove_back(){
 
 template <class T>
 void DoubleLink<T>::remove_front() {
-    if(head == NULL){
+    if(head == nullptr){
         std::cout<<"linked list is empty !"<<std::endl;
         return;
     }
@@ -187,7 +194,7 @@ void DoubleLink<T>::remove_front() {
 
 template <class T>
 void DoubleLink<T>::remove(T val) {
-    if(head == NULL){
+    if(head == nullptr){
         std::cout<<"linked list is empty !"<<std::endl;
     }
     if(val >= size() || val < 0){
@@ -200,7 +207,7 @@ void DoubleLink<T>::remove(T val) {
 
     int count = 0;
     Node<T>* tmp = head;
-    while(tmp != NULL){
+    while(tmp != nullptr){
         if(count == val - 1){
             tmp->next = tmp->next->next;
             std::cout<<"item removed at index "<<val<<std::endl;
@@ -213,10 +220,10 @@ void DoubleLink<T>::remove(T val) {
 
 template <class T>
 void DoubleLink<T>::print_forward() {
-    if(head == NULL){std::cout<<"linked list is empty"<<std::endl;}
+    if(head == nullptr){std::cout<<"linked list is empty"<<std::endl;}
     std::cout<<std::endl<<"----link list items------"<<std::endl;
     Node<T>* tmp = head;
-    while(tmp != NULL){
+    while(tmp != nullptr){
         std::cout<<tmp->data<<" | ";
         tmp = tmp->next;
     }
@@ -225,7 +232,7 @@ void DoubleLink<T>::print_forward() {
 
 template <class T>
 void DoubleLink<T>::print_backward() {
-    if(head == NULL) {std::cout<<"linked list is empty"<<std::endl;}
+    if(head == nullptr) {std::cout<<"linked list is empty"<<std::endl;}
     reverse();
     print_forward();
 }
@@ -234,7 +241,7 @@ template <class T>
 void DoubleLink<T>::reverse() {
     DoubleLink<T> newList;
     Node<T> *tmp = head;
-    while(tmp != NULL) {
+    while(tmp != nullptr) {
         newList.push_front(tmp->data);
         tmp = tmp->next;
     }
