@@ -3,7 +3,7 @@
 #include <unordered_map>
 
 /*
- * Maps, or hashmaps, are key/value structures. No key will have a different value.
+ * Maps, or hashmaps, are key/value structures. Keys will have an identical value.
  *
  * Associated functions:
  *      - insert() - O(log n)

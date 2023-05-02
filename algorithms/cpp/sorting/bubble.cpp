@@ -3,6 +3,7 @@
 #include <stack>
 #include <algorithm>
 #include <queue>
+
 // Templates
 template<typename T>
 void print_array(T const(& arr))
