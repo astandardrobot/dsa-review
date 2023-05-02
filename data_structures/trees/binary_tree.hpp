@@ -3,20 +3,9 @@
 /*
  * Trees are often implemented like linked lists (i.e. with nodes pointing to other nodes).
  * They're structured similar to a heap 
- */
-
-template <class T>
-class Node {
-public:
-    T data;
-    Node<T>* left;
-    Node<T>* right;
-};
-
-/*
- * Imagine this tree for a moment.
- * A quick note: trees are most often configured to be binary.
- * Primarily Complete or Full Binary Trees
+ *
+ *
+ * Trees are most often configured to be binary, most commonly as Complete or Full Binary Trees
  * Full:
  *      - Each parent has either 2 or no nodes
  *      - Leaves do not constrained to this
@@ -24,6 +13,20 @@ public:
  *      - Each parent has 2 children
  *      - All nodes are as FAR LEFT as possible
  *      - Every level except the last is completely filled.
+ */
+
+template <class T>
+class Node {
+public:
+    int key;
+    T data;
+    Node<T>* left;
+    Node<T>* right;
+    Node<T>* parent;
+};
+
+/*
+ * Imagine this tree for a moment.
  *
  *       1
  *    2     3
