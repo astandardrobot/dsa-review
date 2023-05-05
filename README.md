@@ -1,4 +1,4 @@
-# WHAT IS THI?
+# WHAT IS THIS?
 
 Some DS+A review from my university course re-written in C++, along with some notes from sources like StackOverflow and GeeksForGeeks.
 
