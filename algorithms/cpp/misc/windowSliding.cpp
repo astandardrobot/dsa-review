@@ -16,7 +16,7 @@ int minSubLength(std::vector<int>& nums, int target) {
     // Init iterators
     int i = 0, j = 0;
     // Iterate through nums
-    while(i < nums.size()) {
+    while(i < int(nums.size())) {
         // Add the value at the ith index to curr_sum
         curr_sum += nums[i];
         // when / while curr_sum >= the target
